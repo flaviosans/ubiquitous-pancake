@@ -9,6 +9,7 @@ public class RectangleIntersect {
         System.out.println(a.intersects(b));
         System.out.println(a.intersects(c));
         System.out.println(b.intersects(c));
+
+        System.out.println(a.areaOfIntersection(b));
     }
 }
-

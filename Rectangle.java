@@ -1,19 +1,60 @@
 public class Rectangle {
 
-    public Point bottomLeft;
-    public Point bottomRight;
-    public Point topLeft;
-    public Point topRight;
+    private final Point bottomLeft;
+    private final Point bottomRight;
+    private final Point topLeft;
+    private final Point topRight;
+
+    public Point getBottomLeft(){
+        return this.bottomLeft;
+    }
+
+    public Point getBottomRight(){
+        return this.bottomRight;
+    }
+
+    public Point getTopLeft(){
+        return this.topLeft;
+    }
+
+    public Point getTopRight(){
+        return this.topRight;
+    }
+
+    public int getArea(){
+        int width = this.topLeft.y - this.bottomLeft.y;
+        int height = this.bottomRight.x - this.bottomLeft.x;
+        return width * height;
+    }
 
     public Rectangle(Point bottomLeft, Point topRight){
         this.bottomLeft = bottomLeft;
-        this.bottomRight = new Point(bottomLeft.y, topRight.x);
+        this.bottomRight = new Point(topRight.x, bottomLeft.y);
         this.topLeft = new Point(bottomLeft.x, topRight.y);
         this.topRight = topRight;
     }
 
-    public boolean intersects(Rectangle r){
-        return this.bottomLeft.lessThanOrEqual(r.topRight) &&
-            this.topRight.greaterThanOrEqual(r.bottomLeft);
+
+    public boolean intersects(Rectangle rectangle){
+        return this.bottomLeft.lessThanOrEqual(rectangle.topRight) &&
+            this.topRight.greaterThanOrEqual(rectangle.bottomLeft);
+    }
+
+    public int areaOfIntersection(Rectangle rectangle){
+        Rectangle intersected = null;
+        if (this.intersects(rectangle)){
+            if(this.bottomLeft.greaterThanOrEqual(rectangle.bottomLeft)){
+                intersected = new Rectangle(this.topRight, rectangle.bottomLeft);
+            }
+            else{
+                intersected = new Rectangle(
+                        new Point(
+                    this.bottomLeft.y,
+                    rectangle.bottomLeft.y),
+                        new Point(rectangle.topRight.y,this.topRight.x));
+            }
+        }
+
+        return intersected.getArea();
     }
 }

@@ -34,27 +34,25 @@ public class Rectangle {
         this.topRight = topRight;
     }
 
-
     public boolean intersects(Rectangle rectangle){
         return this.bottomLeft.lessThanOrEqual(rectangle.topRight) &&
             this.topRight.greaterThanOrEqual(rectangle.bottomLeft);
     }
 
     public int areaOfIntersection(Rectangle rectangle){
-        Rectangle intersected = null;
+        int area = 0;
         if (this.intersects(rectangle)){
             if(this.bottomLeft.greaterThanOrEqual(rectangle.bottomLeft)){
-                intersected = new Rectangle(this.topRight, rectangle.bottomLeft);
+                area = new Rectangle(this.topRight, rectangle.bottomLeft).getArea();
             }
             else{
-                intersected = new Rectangle(
-                        new Point(
-                    this.bottomLeft.y,
-                    rectangle.bottomLeft.y),
-                        new Point(rectangle.topRight.y,this.topRight.x));
+                area = new Rectangle(
+                        new Point(this.bottomLeft.y,rectangle.bottomLeft.y),
+                        new Point(rectangle.topRight.y,this.topRight.x)
+                    ).getArea();
             }
         }
 
-        return intersected.getArea();
+        return area;
     }
 }

@@ -8,7 +8,6 @@ public class RectangleIntersect {
             new Point(10,10), new Point(14,13));
         System.out.println(a.intersects(b));
         System.out.println(a.intersects(c));
-        System.out.println(b.intersects(c));
 
         System.out.println(a.areaOfIntersection(b));
     }

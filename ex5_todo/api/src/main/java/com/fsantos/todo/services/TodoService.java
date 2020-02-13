@@ -23,8 +23,11 @@ public class TodoService {
         this.todoItemRepository = todoItemRepository;
     }
 
-    public List<TodoItem> getAll(){
-        return todoItemRepository.findAll();
+    public List<TodoItem> getAll(String query){
+        if(!query.equals(""))
+            return todoItemRepository.findByDescriptionLikeOrderByCreatedAsc("%"+query+"%");
+        else
+            return todoItemRepository.findByOrderByCreatedAsc();
     }
 
     public TodoItem getById(Long id){
@@ -48,6 +51,7 @@ public class TodoService {
     public TodoItem update(Long id, TodoItem todoItem){
         TodoItem itemToUpdate = this.getById(id);
         itemToUpdate.setDescription(todoItem.getDescription());
+        itemToUpdate.setDone(todoItem.isDone());
         return todoItemRepository.save(itemToUpdate);
     }
 

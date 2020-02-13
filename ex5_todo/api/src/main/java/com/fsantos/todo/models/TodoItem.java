@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -22,4 +20,10 @@ public class TodoItem {
     private Long id;
     private String description;
     private boolean done;
+    private LocalDateTime created;
+
+    @PrePersist
+    public void prePersist(){
+        this.created = LocalDateTime.now();
+    }
 }

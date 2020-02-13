@@ -21,8 +21,9 @@ public class TodoItemController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TodoItem>> getAll(){
-        List<TodoItem> todoItems = this.todoService.getAll();
+    public ResponseEntity<List<TodoItem>> getAll(
+            @RequestParam(value = "query", required = false) String query){
+        List<TodoItem> todoItems = this.todoService.getAll(query);
         return ResponseEntity.ok(todoItems);
     }
 

@@ -1,8 +1,8 @@
 <div class="todo-margin">
   <h1>Todo List!</h1>
   <div>
-    <input [(ngModel)]="singleTodoItem.description" type="text">
-    <button (click)="save(singleTodoItem)">Filter Todos</button>
+    <input type="text" class="search-input" [(ngModel)]="query" (keyup.enter)="search()">
+    <button class="search-button" (click)="search()">Filter</button>
   </div>
   <div class="todo-item" *ngFor="let item of todoItems">
     <div *ngIf="item !== itemToEdit; else todoEditing">
@@ -12,9 +12,10 @@
       <span [ngClass]="{done: item.done}" (click)="edit(item)">{{item.description}}</span>
     </div>
     <ng-template #todoEditing>
-      <input type="text" [(ngModel)]="item.description">
+      <div><input class="wide-input" type="text" [(ngModel)]="item.description" (focusout)="cancel()"></div>
+      <button [(ngModel)]="item.description" (click)="cancel()">Delete</button>
       <button (click)="update()">Update!</button>
-      <button class="" (click)="delete()">Delete me!</button>
+      <button class="" (click)="cancel()">Cancel</button>
     </ng-template>
   </div>
   <div>

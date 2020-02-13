@@ -18,10 +18,9 @@ export class TodoItemService {
 
   constructor(private client: HttpClient) { }
 
-  public getAll(query?: string) : Observable<TodoItem[]> {
-    let params = new HttpParams();
-    if(!!query) params.set('query', query);
-    return this.client.get<TodoItem[]>(`${url}/todo/`, { params : params});
+  public getAll(query: string = '') : Observable<TodoItem[]> {
+    let params = new HttpParams().set('query', query);
+    return this.client.get<TodoItem[]>(`${url}/todo/`, { params : params });
   }
 
   public getById(id: number) : Observable<TodoItem> {

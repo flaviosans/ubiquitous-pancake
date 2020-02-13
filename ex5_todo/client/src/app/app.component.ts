@@ -11,15 +11,16 @@ export class AppComponent implements OnInit{
   todoItems: TodoItem[];
   singleTodoItem = <TodoItem>{};
   itemToEdit = <TodoItem>{};
+  query: string = '';
 
   constructor(private todoItemService: TodoItemService){ }
 
   ngOnInit(): void {
-    this.loadTodoItems();
+    this.search();
   }
 
-  public loadTodoItems(): void {
-    this.todoItemService.getAll().subscribe(i => {
+  public search(): void {
+    this.todoItemService.getAll(this.query).subscribe(i => {
       this.todoItems = i;
     });
   }
@@ -53,5 +54,9 @@ export class AppComponent implements OnInit{
     this.todoItemService.update(todoItem).subscribe(i => {
       
     });
+  }
+
+  public cancel(){
+    this.itemToEdit = <TodoItem>{};
   }
 }

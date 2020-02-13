@@ -8,3 +8,15 @@
 .todo-margin {
     margin: 1.4rem;
 }
+
+.wide-input {
+    width: 100%;
+}
+
+.search-input {
+    width: 70%;
+}
+
+.search-button {
+    width: 20%;
+}

@@ -1,4 +1,24 @@
-<h1>Todo List!</h1>
-<div *ngFor="let item of todoItems">
-  <input type="checkbox"> {{item.id}} - {{item.description}}
+<div class="todo-margin">
+  <h1>Todo List!</h1>
+  <div>
+    <input [(ngModel)]="singleTodoItem.description" type="text">
+    <button (click)="save(singleTodoItem)">Filter Todos</button>
+  </div>
+  <div class="todo-item" *ngFor="let item of todoItems">
+    <div *ngIf="item !== itemToEdit; else todoEditing">
+      <input type="checkbox"
+      [(ngModel)]="item.done"
+      (change)="markAsDone(item, $event)">
+      <span [ngClass]="{done: item.done}" (click)="edit(item)">{{item.description}}</span>
+    </div>
+    <ng-template #todoEditing>
+      <input type="text" [(ngModel)]="item.description">
+      <button (click)="update()">Update!</button>
+      <button class="" (click)="delete()">Delete me!</button>
+    </ng-template>
+  </div>
+  <div>
+    <input [(ngModel)]="singleTodoItem.description" type="text">
+    <button (click)="save(singleTodoItem)">Save me!</button>
+  </div>
 </div>

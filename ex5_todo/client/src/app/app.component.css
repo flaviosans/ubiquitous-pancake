@@ -1,0 +1,10 @@
+.done {
+    text-decoration:line-through;
+}
+
+.todo-item {
+    margin: 0.8rem 0;
+}
+.todo-margin {
+    margin: 1.4rem;
+}
